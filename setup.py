@@ -4,9 +4,9 @@ with open('README.rst') as f:
     readme = f.read()
 
 setup(
-    name='echo_kernel',
+    name='distalgo_kernel',
     version='1.1',
-    packages=['echo_kernel'],
+    packages=['distalgo_kernel'],
     description='Simple example kernel for Jupyter',
     long_description=readme,
     author='Jupyter Development Team',
