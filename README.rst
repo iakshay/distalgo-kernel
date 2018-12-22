@@ -1,7 +1,7 @@
 DistAlgo Kernel for Jupter
 ===========
 
-``distalgo_kernel`` is Jupyter Kernel for [DistAlgo](https://github.com/DistAlgo/distalgo)
+``distalgo_kernel`` is Jupyter Kernel for  `DistAlgo <https://github.com/DistAlgo/distalgo>`_.
 
 Installation
 ------------
