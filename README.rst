@@ -12,12 +12,14 @@ To install ``distalgo_kernel`` from PyPI::
 
 Using the DistAlgo kernel
 ---------------------
-**Notebook**: The *New* menu in the notebook should show an option for an Echo notebook.
+**Notebook**: The *New* menu in the notebook should show an option for an DistAlgo notebook.
 
-**Console frontends**: To use it with the console frontends, add ``--kernel echo`` to
-their command line arguments.
+**Console frontends**: To use it with the console frontends, add ``--kernel distalgo_kernel`` to
+their command line arguments::
+
+    jupyter console --kernel distalgo_kernel
 
 Todo
 -----
-[ ] supporting running processes
-[ ] improve error stack trace
+- Support running processes
+- Improve error stack trace
