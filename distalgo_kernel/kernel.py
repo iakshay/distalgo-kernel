@@ -3,37 +3,43 @@ import ast
 import traceback
 from ipykernel.kernelbase import Kernel
 from contextlib import redirect_stdout, redirect_stderr
-from da.compiler.ui import dastr_to_pyast, dastr_to_pycode, parse_compiler_args
-import _ast
+from da.compiler.ui import dastr_to_pycode, parse_compiler_args
+from da.compiler.ui import dastr_to_pyast
+
 ctx = {}
 
 #
 # https://stackoverflow.com/a/39381428/1173425
 #
-def exec_then_eval(dastr, _globals, _locals):
-    ns = parse_compiler_args([])
-    block = dastr_to_pyast(dastr, 'str', ns)
+def exec_then_eval(code, globals, locals):
+    print(obj)
+    block = ast.parse(code, mode='exec')
 
     # assumes last node is an expression
-    if isinstance(block.body[-1], _ast.Expr):
-        last = ast.Expression(block.body.pop().value)
-        exec(compile(block, '<string>', mode='exec'), _globals, _locals)
-        exp = eval(compile(last, '<string>', mode='eval'), _globals, _locals)
+    last = ast.Expression(block.body.pop().value)
 
-        print(exp)
+    _globals, _locals = {}, {}
+    exec(compile(block, '<string>', mode='exec'), ctx, ctx)
 
-    else:
-        exec(compile(block, '<string>', mode='exec'), _globals, _locals)
+    exp = eval(compile(last, '<string>', mode='eval'), ctx, ctx)
 
+    print(exp)
 
 def da_execute(code):
+    ns = parse_compiler_args([])
+
+    stdout = io.StringIO()
+    stderr = io.StringIO()
+
+    with redirect_stdout(stdout), redirect_stderr(stderr):
+        obj = dastr_to_pycode(code, '<str>', ns)
 
     stdout = io.StringIO()
     stderr = io.StringIO()
 
     with redirect_stdout(stdout), redirect_stderr(stderr):
         try:
-            exec_then_eval(code, ctx, ctx)
+            exec_then_eval(obj, ctx, ctx)
         except Exception as e:
             tb = traceback.format_exc()
             print(tb)
