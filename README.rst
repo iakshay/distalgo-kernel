@@ -16,3 +16,8 @@ Using the DistAlgo kernel
 
 **Console frontends**: To use it with the console frontends, add ``--kernel echo`` to
 their command line arguments.
+
+Todo
+-----
+[ ] supporting running processes
+[ ] improve error stack trace
